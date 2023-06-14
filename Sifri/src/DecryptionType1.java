@@ -16,11 +16,21 @@ public class DecryptionType1 {
         this.textAfterEncryption = textAfterEncryption;
     }
     public void performDecryption(String text){
-        StringBuilder encryptedMessage = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            char encryptedChar = encryptionMap.getOrDefault(Character.toLowerCase(c), c);
-            encryptedMessage.append(encryptedChar);
+        HashMap<Character, Character> letterMap = new HashMap<>();
+        for (char c = 'z'; c >= 'a'; c--) {
+            char replacement = (char) ('a' + ('z' - c));
+            letterMap.put(c, replacement);
         }
-        textAfterEncryption.setText(encryptedMessage.toString());
+
+        StringBuilder replacedString = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char replacement = letterMap.get(Character.toLowerCase(c));
+                replacedString.append(Character.isUpperCase(c) ? Character.toUpperCase(replacement) : replacement);
+            } else {
+                replacedString.append(c);
+            }
+        }
+        textAfterEncryption.setText(replacedString.toString());
     }
 }

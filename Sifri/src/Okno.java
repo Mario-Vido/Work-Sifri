@@ -16,6 +16,7 @@ public class Okno extends JFrame implements ActionListener {
     private final JButton ButtonForEncryption;
     private final JButton ButtonForDecryption;
     private final JComboBox chooseEncryption;
+    private final JLabel textAfterEncryption;
 
    Okno() {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +28,7 @@ public class Okno extends JFrame implements ActionListener {
        TextFromUser = new JTextField("Write text to encrypt");
        ButtonForDecryption = new JButton("Decryption");
        ButtonForEncryption = new JButton("Encryption");
-       JLabel textAfterEncryption = new JLabel();
+       textAfterEncryption = new JLabel();
        chooseEncryption = new JComboBox(encryptionType);
 
        frame.add(chooseEncryption,BorderLayout.CENTER);
@@ -54,10 +55,10 @@ public class Okno extends JFrame implements ActionListener {
             String selectedType = (String) chooseEncryption.getSelectedItem();
             assert selectedType != null;
             if(selectedType.equals("Encryption type 1")){
-                decryptionType1.performDecryption(TextFromUser.getText());
+                decryptionType1.performDecryption(textAfterEncryption.getText());
             }
             else if(selectedType.equals("Encryption type 2")){
-                decryptionType2.performDecryption(TextFromUser.getText());
+                decryptionType2.performDecryption(textAfterEncryption.getText());
             }
         }
         else if (e.getSource()==ButtonForEncryption){
