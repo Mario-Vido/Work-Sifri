@@ -10,8 +10,9 @@ public class Okno extends JFrame implements ActionListener {
 
     private final EncryptionType1 encryptionType1;
     private final EncryptionType2 encryptionType2;
-    private JTextField TextFromUser;
-    private final JLabel textAfterEncryption;
+    private final DecryptionType1 decryptionType1;
+    private final DecryptionType2 decryptionType2;
+    private final JTextField TextFromUser;
     private final JButton ButtonForEncryption;
     private final JButton ButtonForDecryption;
     private final JComboBox chooseEncryption;
@@ -19,14 +20,14 @@ public class Okno extends JFrame implements ActionListener {
    Okno() {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setSize(500,150);
-       String encryptionType[]={"Encryption type 1","Encryption type 2"};
+       String[] encryptionType ={"Encryption type 1","Encryption type 2"};
        JPanel frame = new JPanel();
        frame.setLayout(new BorderLayout(3,1));
 
        TextFromUser = new JTextField("Write text to encrypt");
        ButtonForDecryption = new JButton("Decryption");
        ButtonForEncryption = new JButton("Encryption");
-       textAfterEncryption= new JLabel();
+       JLabel textAfterEncryption = new JLabel();
        chooseEncryption = new JComboBox(encryptionType);
 
        frame.add(chooseEncryption,BorderLayout.CENTER);
@@ -39,8 +40,10 @@ public class Okno extends JFrame implements ActionListener {
        ButtonForDecryption.addActionListener(this);
        ButtonForEncryption.addActionListener(this);
 
-       encryptionType1 = new EncryptionType1 ( textAfterEncryption);
-       encryptionType2 = new EncryptionType2 ( textAfterEncryption);
+       encryptionType1 = new EncryptionType1 (textAfterEncryption);
+       encryptionType2 = new EncryptionType2 (textAfterEncryption);
+       decryptionType1 = new DecryptionType1(textAfterEncryption);
+       decryptionType2 = new DecryptionType2(textAfterEncryption);
        this.add(frame);
        this.setLocationRelativeTo(null);
        this.setVisible(true);
@@ -48,7 +51,14 @@ public class Okno extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==ButtonForDecryption){
-
+            String selectedType = (String) chooseEncryption.getSelectedItem();
+            assert selectedType != null;
+            if(selectedType.equals("Encryption type 1")){
+                decryptionType1.performDecryption(TextFromUser.getText());
+            }
+            else if(selectedType.equals("Encryption type 2")){
+                decryptionType2.performDecryption(TextFromUser.getText());
+            }
         }
         else if (e.getSource()==ButtonForEncryption){
             String selectedType = (String) chooseEncryption.getSelectedItem();

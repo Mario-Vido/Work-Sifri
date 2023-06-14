@@ -11,7 +11,6 @@ public class EncryptionType1 {
         encryptionMap.put('a', 'x');
         encryptionMap.put('b', 'm');
         encryptionMap.put('c', 'z');
-        encryptionMap.put('d', 'n');
     }
     private final JLabel TextAfterEncryption;
 
@@ -20,11 +19,21 @@ public class EncryptionType1 {
     }
 
     public void performEncryption(String text) {
-        StringBuilder encryptedMessage = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            char encryptedChar = encryptionMap.getOrDefault(Character.toLowerCase(c), c);
-            encryptedMessage.append(encryptedChar);
+        HashMap<Character, Character> letterMap = new HashMap<>();
+        for (char c = 'a'; c <= 'z'; c++) {
+            char replacement = (char) ('z' - (c - 'a'));
+            letterMap.put(c, replacement);
         }
-        TextAfterEncryption.setText(encryptedMessage.toString());
+
+        StringBuilder replacedString = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char replacement = letterMap.get(Character.toLowerCase(c));
+                replacedString.append(Character.isUpperCase(c) ? Character.toUpperCase(replacement) : replacement);
+            } else {
+                replacedString.append(c);
+            }
+        }
+        TextAfterEncryption.setText(replacedString.toString());
     }
 }
