@@ -1,24 +1,25 @@
 import javax.swing.*;
 
 public class DecryptionType2 {
+
     private final JLabel textAfterEncryption;
     public DecryptionType2(JLabel textAfterEncryption) {
         this.textAfterEncryption = textAfterEncryption;
     }
 
     public void performDecryption(String text) {
-        String[] words = text.split(" ");
-        StringBuilder decryptedString = new StringBuilder();
-
-        for (String word : words) {
-            StringBuilder decryptedWord = new StringBuilder(word);
-            for (int i = decryptedWord.length() - 1; i > 0; i -= 2) {
-                char temp = decryptedWord.charAt(i);
-                decryptedWord.setCharAt(i, decryptedWord.charAt((i - 1 + decryptedWord.length()) % decryptedWord.length()));
-                decryptedWord.setCharAt((i - 1 + decryptedWord.length()) % decryptedWord.length(), temp);
+        StringBuilder plaintext = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char currentChar = text.charAt(i);
+            if (Character.isLetter(currentChar)) {
+                int shift=3;
+                //char decryptedChar = (char) ((currentChar - 'a' - shift + 26) % 26 + 'a');
+                char decryptedChar = (char) ((currentChar - 'a' - shift + 26) % 26 + 'a');
+                plaintext.append(decryptedChar);
+            } else {
+                plaintext.append(currentChar);
             }
-            decryptedString.append(decryptedWord).append(" ");
         }
-        textAfterEncryption.setText(decryptedString.toString().trim());
+        textAfterEncryption.setText(plaintext.toString());
     }
 }

@@ -11,18 +11,17 @@ public class EncryptionType2 {
     }
 
     public void performEncryption(String text) {
-        String[] words = text.split(" ");
-        StringBuilder shuffledString = new StringBuilder();
-
-        for (String word : words) {
-            StringBuilder shuffledWord = new StringBuilder(word);
-            for (int i = 1; i < shuffledWord.length(); i += 2) {
-                char temp = shuffledWord.charAt(i);
-                shuffledWord.setCharAt(i, shuffledWord.charAt((i + 1) % shuffledWord.length()));
-                shuffledWord.setCharAt((i + 1) % shuffledWord.length(), temp);
+        StringBuilder ciphertext = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char currentChar = text.charAt(i);
+            if (Character.isLetter(currentChar)) {
+                int shift = 3;
+                char encryptedChar = (char) ((currentChar - 'a' + shift) % 26 + 'a');
+                ciphertext.append(encryptedChar);
+            } else {
+                ciphertext.append(currentChar);
             }
-            shuffledString.append(shuffledWord).append(" ");
         }
-        TextAfterEncryption.setText(shuffledString.toString().trim());
+        TextAfterEncryption.setText(ciphertext.toString());
     }
 }
