@@ -10,8 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Okno extends JFrame implements ActionListener {
-
+public class MyFrame extends JFrame implements ActionListener {
     private final EncryptionType1 encryptionType1;
     private final EncryptionType2 encryptionType2;
     private final DecryptionType1 decryptionType1;
@@ -22,7 +21,7 @@ public class Okno extends JFrame implements ActionListener {
     private final JComboBox chooseEncryption;
     private final JLabel textAfterEncryption;
 
-   public Okno() {
+   public MyFrame() {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setSize(500,150);
        String[] encryptionType ={"Encryption type 1","Encryption type 2"};
@@ -46,8 +45,8 @@ public class Okno extends JFrame implements ActionListener {
        ButtonForDecryption.addActionListener(this);
        ButtonForEncryption.addActionListener(this);
 
-       encryptionType1 = new EncryptionType1 (textAfterEncryption);
-       encryptionType2 = new EncryptionType2 (textAfterEncryption);
+       encryptionType1 = new EncryptionType1(textAfterEncryption);
+       encryptionType2 = new EncryptionType2(textAfterEncryption);
        decryptionType1 = new DecryptionType1(textAfterEncryption);
        decryptionType2 = new DecryptionType2(textAfterEncryption);
        this.add(frame);
@@ -59,18 +58,18 @@ public class Okno extends JFrame implements ActionListener {
         String selectedType = (String) chooseEncryption.getSelectedItem();
         assert selectedType != null;
         if(e.getSource()==ButtonForDecryption){
-            if(selectedType.equals("Encryption type 1")){
+            if(selectedType.equals("Encryption.Encryption type 1")){
                 decryptionType1.performDecryption(textAfterEncryption.getText());
             }
-            else if(selectedType.equals("Encryption type 2")){
+            else if(selectedType.equals("Encryption.Encryption type 2")){
                 decryptionType2.performDecryption(textAfterEncryption.getText());
             }
         }
         else if (e.getSource()==ButtonForEncryption){
-            if(selectedType.equals("Encryption type 1")){
+            if(selectedType.equals("Encryption.Encryption type 1")){
                 encryptionType1.performEncryption(TextFromUser.getText());
             }
-            else if(selectedType.equals("Encryption type 2")){
+            else if(selectedType.equals("Encryption.Encryption type 2")){
                 encryptionType2.performEncryption(TextFromUser.getText());
             }
         }

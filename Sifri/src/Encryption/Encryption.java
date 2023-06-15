@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public interface Encrzption {
+package Encryption;
+
+public interface Encryption {
+    void performEncryption(String text);
 }

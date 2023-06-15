@@ -2,13 +2,14 @@ package Decryption;
 
 import javax.swing.*;
 
-public class DecryptionType2 {
+public class DecryptionType2 implements Decryption {
 
     private final JLabel textAfterEncryption;
     public DecryptionType2(JLabel textAfterEncryption) {
         this.textAfterEncryption = textAfterEncryption;
     }
 
+    @Override
     public void performDecryption(String text) {
         StringBuilder plaintext = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {

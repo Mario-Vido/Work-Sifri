@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DecryptionType1 {
+public class DecryptionType1 implements Decryption {
 
     private final JLabel textAfterEncryption;
     public DecryptionType1(JLabel textAfterEncryption) {
         this.textAfterEncryption = textAfterEncryption;
     }
+
+    @Override
     public void performDecryption(String text){
         HashMap<Character, Character> letterMap = new HashMap<>();
         for (char c = 'z'; c >= 'a'; c--) {

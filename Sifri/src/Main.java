@@ -1,7 +1,7 @@
-import Core.Okno;
+import Core.MyFrame;
 
 public class Main {
     public static void main(String[] args) {
-        new Okno();
+        new MyFrame();
     }
 }
