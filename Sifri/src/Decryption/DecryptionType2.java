@@ -1,3 +1,5 @@
+package Decryption;
+
 import javax.swing.*;
 
 public class DecryptionType2 {
@@ -13,7 +15,6 @@ public class DecryptionType2 {
             char currentChar = text.charAt(i);
             if (Character.isLetter(currentChar)) {
                 int shift=3;
-                //char decryptedChar = (char) ((currentChar - 'a' - shift + 26) % 26 + 'a');
                 char decryptedChar = (char) ((currentChar - 'a' - shift + 26) % 26 + 'a');
                 plaintext.append(decryptedChar);
             } else {

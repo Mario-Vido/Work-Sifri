@@ -1,3 +1,7 @@
+package Core;
+
+import Decryption.DecryptionType1;
+import Decryption.DecryptionType2;
 import Encryption.EncryptionType1;
 import Encryption.EncryptionType2;
 
@@ -18,22 +22,23 @@ public class Okno extends JFrame implements ActionListener {
     private final JComboBox chooseEncryption;
     private final JLabel textAfterEncryption;
 
-   Okno() {
+   public Okno() {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setSize(500,150);
        String[] encryptionType ={"Encryption type 1","Encryption type 2"};
        JPanel frame = new JPanel();
        frame.setLayout(new BorderLayout(3,1));
 
-       TextFromUser = new JTextField("Write text to encrypt");
+       TextFromUser = new JTextField("write text to encrypt");
        ButtonForDecryption = new JButton("Decryption");
        ButtonForEncryption = new JButton("Encryption");
        textAfterEncryption = new JLabel();
        chooseEncryption = new JComboBox(encryptionType);
 
-       frame.add(chooseEncryption,BorderLayout.CENTER);
+
        frame.add(TextFromUser,BorderLayout.PAGE_START);
        frame.add(ButtonForEncryption,BorderLayout.LINE_START);
+       frame.add(chooseEncryption,BorderLayout.CENTER);
        frame.add(ButtonForDecryption,BorderLayout.LINE_END);
        frame.add(textAfterEncryption,BorderLayout.PAGE_END);
 
@@ -51,9 +56,9 @@ public class Okno extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        String selectedType = (String) chooseEncryption.getSelectedItem();
+        assert selectedType != null;
         if(e.getSource()==ButtonForDecryption){
-            String selectedType = (String) chooseEncryption.getSelectedItem();
-            assert selectedType != null;
             if(selectedType.equals("Encryption type 1")){
                 decryptionType1.performDecryption(textAfterEncryption.getText());
             }
@@ -62,8 +67,6 @@ public class Okno extends JFrame implements ActionListener {
             }
         }
         else if (e.getSource()==ButtonForEncryption){
-            String selectedType = (String) chooseEncryption.getSelectedItem();
-            assert selectedType != null;
             if(selectedType.equals("Encryption type 1")){
                 encryptionType1.performEncryption(TextFromUser.getText());
             }
