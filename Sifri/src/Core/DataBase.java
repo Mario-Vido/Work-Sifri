@@ -1,25 +1,26 @@
 package Core;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.swing.*;
+import java.sql.*;
 
 public class DataBase {
     public DataBase(){
+
+    }
+    public void insertMassage(JTextField textFromUser, JLabel textAfterEncryption, String selectedItem){
         String jdbcURL = "jdbc:postgresql://localhost:5432/Skuska";
         String username = "postgres";
         String password = "123";
         try {
             Connection connection = DriverManager.getConnection(jdbcURL,username,password);
             System.out.println("Connected ti PostgradeSQL server");
-            String sql = "INSERT INTO cypherAuditLog (input, output,cypher, timestamp)" + " VALUES ('Ravi', 'Kumar', 'ravi.kumar@gmail.com')";
+            String sql = "INSERT INTO cypherauditlog (input, output,cypher) VALUES (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,textFromUser.getText());
+            statement.setString(2,textAfterEncryption.getText());
+            statement.setString(3,selectedItem);
+            statement.executeUpdate();
 
-            Statement statement = connection.createStatement();
-            int rows = statement.executeUpdate(sql);
-            if(rows > 0){
-                System.out.println("A new contact has been inserted");
-            }
 
             connection.close();
         } catch (SQLException e) {
@@ -27,4 +28,5 @@ public class DataBase {
             throw new RuntimeException(e);
         }
     }
+
 }

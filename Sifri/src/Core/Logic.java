@@ -21,6 +21,8 @@ public class Logic implements ActionListener {
     private final DecryptionType1 decryptionType1;
     private final DecryptionType2 decryptionType2;
 
+    private final DataBase dataBase;
+
     public Logic(JButton buttonForEncryption, JButton buttonForDecryption, JTextField textFromUser, JLabel textAfterEncryption, JComboBox chooseEncryption) {
         this.buttonForDecryption=buttonForDecryption;
         this.buttonForEncryption=buttonForEncryption;
@@ -29,6 +31,7 @@ public class Logic implements ActionListener {
         this.chooseEncryption=chooseEncryption;
 
         addActionListeners();
+        dataBase = new DataBase();
         encryptionType1 = new EncryptionType1(textAfterEncryption);
         encryptionType2 = new EncryptionType2(textAfterEncryption);
         decryptionType1 = new DecryptionType1(textAfterEncryption);
@@ -56,9 +59,12 @@ public class Logic implements ActionListener {
         else if (e.getSource()==buttonForEncryption){
             if(selectedType.equals("Encryption type 1")){
                 encryptionType1.performEncryption(textFromUser.getText());
+                dataBase.insertMassage(textFromUser,textAfterEncryption,(String) chooseEncryption.getSelectedItem());
+
             }
             else if(selectedType.equals("Encryption type 2")){
                 encryptionType2.performEncryption(textFromUser.getText());
+                dataBase.insertMassage(textFromUser,textAfterEncryption,(String) chooseEncryption.getSelectedItem());
             }
         }
     }
