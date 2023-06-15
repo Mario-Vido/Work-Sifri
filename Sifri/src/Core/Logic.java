@@ -16,7 +16,6 @@ public class Logic implements ActionListener {
     private final JTextField textFromUser;
     private final JLabel textAfterEncryption;
     private final JComboBox chooseEncryption;
-
     private final EncryptionType1 encryptionType1;
     private final EncryptionType2 encryptionType2;
     private final DecryptionType1 decryptionType1;
