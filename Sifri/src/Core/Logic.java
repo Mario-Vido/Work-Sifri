@@ -40,9 +40,9 @@ public class Logic implements ActionListener {
         String helper;
 
         if (e.getSource() == buttonForEncryption) {
-            helper = URLEncoder.encode("Encryption");
+            helper = URLEncoder.encode(String.valueOf(0));
         } else if (e.getSource() == buttonForDecryption) {
-            helper = URLEncoder.encode("Decryption");
+            helper = URLEncoder.encode(String.valueOf(1));
         } else {
             return;
         }
