@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0a94d15-f2e7-43a4-b30d-6dd9369a5bab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_6_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Work-Sifri.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Work-Sifri.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Core/Logic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Core/Logic.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686811005005</updated>
       <workItem from="1686811006879" duration="14000" />
-      <workItem from="1686896970346" duration="3129000" />
+      <workItem from="1686896970346" duration="6437000" />
     </task>
     <servers />
   </component>

@@ -63,27 +63,26 @@ public class Logic implements ActionListener {
         }
         else if (e.getSource()==buttonForEncryption){
             if(selectedType.equals("Encryption type 1")) {
-                encryptionType1.performEncryption(textFromUser.getText());
-                dataBase.insertMassage(textFromUser, textAfterEncryption, (String) chooseEncryption.getSelectedItem());
+//                encryptionType1.performEncryption(textFromUser.getText());
+//                dataBase.insertMassage(textFromUser, textAfterEncryption, (String) chooseEncryption.getSelectedItem());
                 HttpURLConnection connection = null;
                 int responseCode = 0;
                 try {
                     String parameterValue=textFromUser.getText();
                     String encodedValue = URLEncoder.encode(parameterValue);
-
-                    url =new URL("http://localhost:8080/cypher?param=" + encodedValue);
+                    String typeOfCypher = URLEncoder.encode(chooseEncryption.getSelectedItem().toString());
+                    url =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher);
                     connection = (HttpURLConnection) url.openConnection();
-                    System.out.println("Connected to URL");
-
                     connection.setRequestMethod("GET");
-                    System.out.println("Get method");
-
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String response = in.readLine();
+                    textAfterEncryption.setText(response);
                     responseCode = connection.getResponseCode();
-                    System.out.println("Got response");
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+
                 System.out.println("Response Code: " + responseCode);
             }
             else if(selectedType.equals("Encryption type 2")){
