@@ -1,10 +1,5 @@
 package Core;
 
-import Decryption.DecryptionType1;
-import Decryption.DecryptionType2;
-import Encryption.EncryptionType1;
-import Encryption.EncryptionType2;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,23 +14,18 @@ public class Logic implements ActionListener {
     private final JButton buttonForDecryption;
     private final JTextField textFromUser;
     private final JLabel textAfterEncryption;
-    private final JComboBox chooseEncryption;
-    private final DecryptionType2 decryptionType2;
+    private final JComboBox<String> chooseEncryption;
+    private final String baseUrl = "http://localhost:8080/cypher";
 
-    private final DataBase dataBase;
-    private URL url1;
-    private URL url2;
 
-    public Logic(JButton buttonForEncryption, JButton buttonForDecryption, JTextField textFromUser, JLabel textAfterEncryption, JComboBox chooseEncryption) throws MalformedURLException {
-        this.buttonForDecryption=buttonForDecryption;
-        this.buttonForEncryption=buttonForEncryption;
-        this.textFromUser=textFromUser;
-        this.textAfterEncryption=textAfterEncryption;
-        this.chooseEncryption=chooseEncryption;
+    public Logic(JButton buttonForEncryption, JButton buttonForDecryption, JTextField textFromUser, JLabel textAfterEncryption, JComboBox chooseEncryption) {
+        this.buttonForDecryption = buttonForDecryption;
+        this.buttonForEncryption = buttonForEncryption;
+        this.textFromUser = textFromUser;
+        this.textAfterEncryption = textAfterEncryption;
+        this.chooseEncryption = chooseEncryption;
 
         addActionListeners();
-        dataBase = new DataBase();
-        decryptionType2 = new DecryptionType2(textAfterEncryption);
     }
 
     public void addActionListeners(){
@@ -43,46 +33,51 @@ public class Logic implements ActionListener {
         buttonForDecryption.addActionListener(this);
         chooseEncryption.addActionListener(this);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String encodedValue = URLEncoder.encode(textFromUser.getText());
+        String typeOfCypher = URLEncoder.encode(chooseEncryption.getSelectedItem().toString());
         String helper;
-        String typeOfCypher = URLEncoder.encode((String) chooseEncryption.getSelectedItem());
-        HttpURLConnection connection = null;
-        int responseCode = 0;
-        assert typeOfCypher != null;
-        if (e.getSource()==buttonForEncryption){
-                try {
-                    helper=URLEncoder.encode("Encryption");
-                    url2 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
-                    connection = (HttpURLConnection) url2.openConnection();
-                    connection.setRequestMethod("GET");
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    String response = in.readLine();
-                    textAfterEncryption.setText(response);
-                    responseCode = connection.getResponseCode();
 
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
+        if (e.getSource() == buttonForEncryption) {
+            helper = URLEncoder.encode("Encryption");
+        } else if (e.getSource() == buttonForDecryption) {
+            helper = URLEncoder.encode("Decryption");
+        } else {
+            return;
         }
-        else if(e.getSource()==buttonForDecryption){
-            try {
-                helper=URLEncoder.encode("Decryption");
-                url1 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
-                connection = (HttpURLConnection) url1.openConnection();
-                connection.setRequestMethod("GET");
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+        try {
+            int responseCode = getResponseCode(encodedValue, typeOfCypher, helper);
+            System.out.println("Response Code: " + responseCode);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private int getResponseCode(String encodedValue, String typeOfCypher, String helper) throws IOException {
+        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
+
+        HttpURLConnection connection = null;
+        int responseCode;
+
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String response = in.readLine();
                 textAfterEncryption.setText(response);
-                responseCode = connection.getResponseCode();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            }
+
+            responseCode = connection.getResponseCode();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
             }
         }
-        System.out.println("Response Code: " + responseCode);
+
+        return responseCode;
     }
 }
 
