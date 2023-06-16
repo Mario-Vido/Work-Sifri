@@ -2,11 +2,12 @@ package Core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.MalformedURLException;
 
 
 public class MyFrame extends JFrame {
 
-    public MyFrame() {
+    public MyFrame() throws MalformedURLException {
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setSize(500,150);
        String[] encryptionType ={"Encryption type 1","Encryption type 2"};
