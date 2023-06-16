@@ -62,7 +62,6 @@ public class Logic implements ActionListener {
             }
         }
         else if (e.getSource()==buttonForEncryption){
-            if(selectedType.equals("Encryption type 1")) {
                 HttpURLConnection connection = null;
                 int responseCode = 0;
                 try {
@@ -81,11 +80,6 @@ public class Logic implements ActionListener {
                     throw new RuntimeException(ex);
                 }
                 System.out.println("Response Code: " + responseCode);
-            }
-            else if(selectedType.equals("Encryption type 2")){
-                encryptionType2.performEncryption(textFromUser.getText());
-                dataBase.insertMassage(textFromUser,textAfterEncryption,(String) chooseEncryption.getSelectedItem());
-            }
         }
     }
 }
