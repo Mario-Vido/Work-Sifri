@@ -20,13 +20,11 @@ public class Logic implements ActionListener {
     private final JTextField textFromUser;
     private final JLabel textAfterEncryption;
     private final JComboBox chooseEncryption;
-    private final EncryptionType1 encryptionType1;
-    private final EncryptionType2 encryptionType2;
-    private final DecryptionType1 decryptionType1;
     private final DecryptionType2 decryptionType2;
 
     private final DataBase dataBase;
-    private URL url;
+    private URL url1;
+    private URL url2;
 
     public Logic(JButton buttonForEncryption, JButton buttonForDecryption, JTextField textFromUser, JLabel textAfterEncryption, JComboBox chooseEncryption) throws MalformedURLException {
         this.buttonForDecryption=buttonForDecryption;
@@ -37,9 +35,6 @@ public class Logic implements ActionListener {
 
         addActionListeners();
         dataBase = new DataBase();
-        encryptionType1 = new EncryptionType1(textAfterEncryption);
-        encryptionType2 = new EncryptionType2(textAfterEncryption);
-        decryptionType1 = new DecryptionType1(textAfterEncryption);
         decryptionType2 = new DecryptionType2(textAfterEncryption);
     }
 
@@ -51,25 +46,36 @@ public class Logic implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String selectedType = (String) chooseEncryption.getSelectedItem();
-        assert selectedType != null;
+        String encodedValue = URLEncoder.encode(textFromUser.getText());
+        String helper;
+        String typeOfCypher = URLEncoder.encode((String) chooseEncryption.getSelectedItem());
+        HttpURLConnection connection = null;
+        int responseCode = 0;
+        assert typeOfCypher != null;
         if(e.getSource()==buttonForDecryption){
-            if(selectedType.equals("Encryption type 1")){
-                decryptionType1.performDecryption(textAfterEncryption.getText());
+            if(chooseEncryption.getSelectedItem().equals("Encryption type 1")){
+                try {
+                    helper=URLEncoder.encode("Decryption");
+                    url1 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
+                    connection = (HttpURLConnection) url1.openConnection();
+                    connection.setRequestMethod("GET");
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String response = in.readLine();
+                    textAfterEncryption.setText(response);
+                    responseCode = connection.getResponseCode();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
-            else if(selectedType.equals("Encryption type 2")){
+            else if(typeOfCypher.equals("Encryption type 2")){
                 decryptionType2.performDecryption(textAfterEncryption.getText());
             }
         }
         else if (e.getSource()==buttonForEncryption){
-                HttpURLConnection connection = null;
-                int responseCode = 0;
                 try {
-                    String parameterValue=textFromUser.getText();
-                    String encodedValue = URLEncoder.encode(parameterValue);
-                    String typeOfCypher = URLEncoder.encode(chooseEncryption.getSelectedItem().toString());
-                    url =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher);
-                    connection = (HttpURLConnection) url.openConnection();
+                    helper=URLEncoder.encode("Encryption");
+                    url2 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
+                    connection = (HttpURLConnection) url2.openConnection();
                     connection.setRequestMethod("GET");
                     BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String response = in.readLine();
