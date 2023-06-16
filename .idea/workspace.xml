@@ -64,22 +64,11 @@
       <option name="presentableId" value="Default" />
       <updated>1686811005005</updated>
       <workItem from="1686811006879" duration="14000" />
-      <workItem from="1686896970346" duration="10120000" />
+      <workItem from="1686896970346" duration="10804000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Sifri/src/Core/Logic.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

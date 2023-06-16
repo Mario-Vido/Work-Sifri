@@ -52,26 +52,7 @@ public class Logic implements ActionListener {
         HttpURLConnection connection = null;
         int responseCode = 0;
         assert typeOfCypher != null;
-        if(e.getSource()==buttonForDecryption){
-            if(chooseEncryption.getSelectedItem().equals("Encryption type 1")){
-                try {
-                    helper=URLEncoder.encode("Decryption");
-                    url1 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
-                    connection = (HttpURLConnection) url1.openConnection();
-                    connection.setRequestMethod("GET");
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    String response = in.readLine();
-                    textAfterEncryption.setText(response);
-                    responseCode = connection.getResponseCode();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            else if(typeOfCypher.equals("Encryption type 2")){
-                decryptionType2.performDecryption(textAfterEncryption.getText());
-            }
-        }
-        else if (e.getSource()==buttonForEncryption){
+        if (e.getSource()==buttonForEncryption){
                 try {
                     helper=URLEncoder.encode("Encryption");
                     url2 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
@@ -85,8 +66,23 @@ public class Logic implements ActionListener {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                System.out.println("Response Code: " + responseCode);
+
         }
+        else if(e.getSource()==buttonForDecryption){
+            try {
+                helper=URLEncoder.encode("Decryption");
+                url1 =new URL("http://localhost:8080/cypher?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
+                connection = (HttpURLConnection) url1.openConnection();
+                connection.setRequestMethod("GET");
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String response = in.readLine();
+                textAfterEncryption.setText(response);
+                responseCode = connection.getResponseCode();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        System.out.println("Response Code: " + responseCode);
     }
 }
 
