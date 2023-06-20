@@ -8,22 +8,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+import Objects.Cypher;
+import com.google.gson.Gson;
+import lombok.Getter;
+
 public class Logic implements ActionListener {
 
+    @Getter
     private final JButton buttonForEncryption;
+    @Getter
     private final JButton buttonForDecryption;
+    @Getter
     private final JTextField textFromUser;
+    @Getter
     private final JLabel textAfterEncryption;
-    private final JComboBox<String> chooseEncryption;
+    @Getter
+    private final JComboBox chooseEncryption;
+    private final JFrame myFrame;
     private final String baseUrl = "http://localhost:8080/cypher";
 
 
-    public Logic(JButton buttonForEncryption, JButton buttonForDecryption, JTextField textFromUser, JLabel textAfterEncryption, JComboBox chooseEncryption) {
-        this.buttonForDecryption = buttonForDecryption;
-        this.buttonForEncryption = buttonForEncryption;
-        this.textFromUser = textFromUser;
-        this.textAfterEncryption = textAfterEncryption;
-        this.chooseEncryption = chooseEncryption;
+    public Logic(JFrame myFrame) throws IOException {
+        CyphersFromServer cyphersFromServer = new CyphersFromServer();
+        this.textFromUser = new JTextField("write text to encrypt");
+        this.buttonForDecryption = new JButton("Decryption");
+        this.buttonForEncryption = new JButton("Encryption");
+        this.textAfterEncryption = new JLabel();
+        this.chooseEncryption =  new JComboBox<>(cyphersFromServer.getCypherList().toArray(new Cypher[0]));
+        this.myFrame = myFrame;
 
         addActionListeners();
     }
@@ -54,6 +66,7 @@ public class Logic implements ActionListener {
             throw new RuntimeException(ex);
         }
     }
+
 
     private int getResponseCode(String encodedValue, String typeOfCypher, String helper) throws IOException {
         URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);

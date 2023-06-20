@@ -1,37 +1,32 @@
 package Core;
 
+import Objects.Cypher;
+
 import javax.swing.*;
 import java.awt.*;
-import java.net.MalformedURLException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MyFrame extends JFrame {
 
-    public MyFrame() throws MalformedURLException {
-       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       this.setSize(500,150);
-       String[] encryptionType ={"Encryption type 1","Encryption type 2"};
-       JPanel frame = new JPanel();
-       frame.setLayout(new BorderLayout(3,1));
+    public MyFrame() throws IOException {
 
-        JTextField textFromUser = new JTextField("write text to encrypt");
-        JButton buttonForDecryption = new JButton("Decryption");
-        JButton buttonForEncryption = new JButton("Encryption");
-        JLabel textAfterEncryption = new JLabel();
-        JComboBox chooseEncryption = new JComboBox(encryptionType);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(500,150);
+        JPanel frame = new JPanel();
+        frame.setLayout(new BorderLayout(3,1));
+        
+        Logic logic = new Logic(this);
+        frame.add(logic.getTextFromUser(),BorderLayout.PAGE_START);
+        frame.add(logic.getButtonForEncryption(),BorderLayout.LINE_START);
+        frame.add(logic.getChooseEncryption(),BorderLayout.CENTER);
+        frame.add(logic.getButtonForDecryption(),BorderLayout.LINE_END);
+        frame.add(logic.getTextAfterEncryption(),BorderLayout.PAGE_END);
 
-
-       frame.add(textFromUser,BorderLayout.PAGE_START);
-       frame.add(buttonForEncryption,BorderLayout.LINE_START);
-       frame.add(chooseEncryption,BorderLayout.CENTER);
-       frame.add(buttonForDecryption,BorderLayout.LINE_END);
-       frame.add(textAfterEncryption,BorderLayout.PAGE_END);
-
-
-
-       Logic logic = new Logic(buttonForEncryption, buttonForDecryption, textFromUser, textAfterEncryption, chooseEncryption);
-       this.add(frame);
-       this.setLocationRelativeTo(null);
-       this.setVisible(true);
+        this.add(frame);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }
