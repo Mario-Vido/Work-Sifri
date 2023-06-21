@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Objects;
+
+import Service.LogicService;
 import lombok.Getter;
 
 public class Logic implements ActionListener {
@@ -42,6 +44,7 @@ public class Logic implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        LogicService service = new LogicService();
         String encodedValue = URLEncoder.encode(textFromUser.getText());
         String typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
 
@@ -49,7 +52,7 @@ public class Logic implements ActionListener {
         if (e.getSource() == buttonForEncryption) {
             baseUrl ="http://localhost:8080/cypher";
             try {
-                int response = getResponseCode(encodedValue, typeOfCypher, baseUrl);
+                int response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl,textAfterEncryption);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -58,7 +61,7 @@ public class Logic implements ActionListener {
             baseUrl = "http://localhost:8080/decypher";
             String valueAfterCypher= URLEncoder.encode(textAfterEncryption.getText());
             try {
-                int response = getResponseCode(valueAfterCypher, typeOfCypher, baseUrl);
+                int response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl,textAfterEncryption);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -66,29 +69,5 @@ public class Logic implements ActionListener {
         }
     }
 
-
-    private int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl) throws IOException {
-        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher);
-        HttpURLConnection connection;
-        int responseCode;
-
-        try {
-
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String response = in.readLine();
-                textAfterEncryption.setText(response);
-            }
-
-            responseCode = connection.getResponseCode();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return responseCode;
-    }
 }
 
