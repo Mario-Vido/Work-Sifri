@@ -1,13 +1,8 @@
 package Core;
 
-import Objects.Cypher;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MyFrame extends JFrame {
 
@@ -17,7 +12,7 @@ public class MyFrame extends JFrame {
         this.setSize(500,150);
         JPanel frame = new JPanel();
         frame.setLayout(new BorderLayout(3,1));
-        
+
         Logic logic = new Logic(this);
         frame.add(logic.getTextFromUser(),BorderLayout.PAGE_START);
         frame.add(logic.getButtonForEncryption(),BorderLayout.LINE_START);

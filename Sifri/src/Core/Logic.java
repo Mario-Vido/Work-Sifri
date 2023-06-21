@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.Objects;
 
 import Objects.Cypher;
 import com.google.gson.Gson;
@@ -25,7 +26,7 @@ public class Logic implements ActionListener {
     @Getter
     private final JComboBox chooseEncryption;
     private final JFrame myFrame;
-    private final String baseUrl = "http://localhost:8080/cypher";
+    private String baseUrl;
 
 
     public Logic(JFrame myFrame) throws IOException {
@@ -34,7 +35,7 @@ public class Logic implements ActionListener {
         this.buttonForDecryption = new JButton("Decryption");
         this.buttonForEncryption = new JButton("Encryption");
         this.textAfterEncryption = new JLabel();
-        this.chooseEncryption =  new JComboBox<>(cyphersFromServer.getCypherList().toArray(new Cypher[0]));
+        this.chooseEncryption =  new JComboBox<>(cyphersFromServer.getNames().toArray(new String[0]));
         this.myFrame = myFrame;
 
         addActionListeners();
@@ -48,33 +49,37 @@ public class Logic implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String encodedValue = URLEncoder.encode(textFromUser.getText());
-        String typeOfCypher = URLEncoder.encode(chooseEncryption.getSelectedItem().toString());
-        String helper;
+        String typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
 
         if (e.getSource() == buttonForEncryption) {
-            helper = URLEncoder.encode(String.valueOf(0));
+            baseUrl="http://localhost:8080/cypher";
+            try {
+                int responseCode = getResponseCode(encodedValue, typeOfCypher,baseUrl);
+                System.out.println("Response Code: " + responseCode);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getSource() == buttonForDecryption) {
-            helper = URLEncoder.encode(String.valueOf(1));
-        } else {
-            return;
-        }
-
-        try {
-            int responseCode = getResponseCode(encodedValue, typeOfCypher, helper);
-            System.out.println("Response Code: " + responseCode);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            baseUrl = "http://localhost:8080/decypher";
+            String valueAfterCypher= URLEncoder.encode(textAfterEncryption.getText());
+            try {
+                int responseCode = getResponseCode(valueAfterCypher, typeOfCypher,baseUrl);
+                System.out.println("Response Code: " + responseCode);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
 
-    private int getResponseCode(String encodedValue, String typeOfCypher, String helper) throws IOException {
-        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + helper);
-
-        HttpURLConnection connection = null;
+    private int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl) throws IOException {
+        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher);
+        System.out.println(encodedValue);
+        HttpURLConnection connection;
         int responseCode;
 
         try {
+
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -84,10 +89,9 @@ public class Logic implements ActionListener {
             }
 
             responseCode = connection.getResponseCode();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         return responseCode;

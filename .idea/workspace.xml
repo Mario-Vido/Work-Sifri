@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0a94d15-f2e7-43a4-b30d-6dd9369a5bab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sifri/src/Core/CyphersFromServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sifri/src/Objects/Cypher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sifri/src/Core/CyphersFromServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/CyphersFromServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Work-Sifri.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Work-Sifri.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Core/Logic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Core/Logic.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Core/MyFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Core/MyFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Objects/Cypher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Objects/Cypher.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +46,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "extract.method.default.visibility": "private",
-    "last_opened_file_path": "C:/Users/Vido/Downloads/gson-2.10.1.jar",
+    "last_opened_file_path": "C:/Users/Vido/Desktop/Project/Work-Sifri",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,7 +81,8 @@
       <updated>1686811005005</updated>
       <workItem from="1686811006879" duration="14000" />
       <workItem from="1686896970346" duration="18821000" />
-      <workItem from="1687242811217" duration="18217000" />
+      <workItem from="1687242811217" duration="20500000" />
+      <workItem from="1687327837558" duration="3198000" />
     </task>
     <servers />
   </component>
@@ -97,13 +94,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Sifri/src/Core/Logic.java</url>
-          <line>71</line>
+          <line>75</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Sifri/src/Core/MyFrame.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/Sifri/src/Core/Logic.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
