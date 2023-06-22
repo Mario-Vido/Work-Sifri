@@ -18,7 +18,7 @@ public class LogicService implements LogicInterface {
         String response;
 
         try {
-            URL url = new URL(baseURL + "?username=" + username + "&password=" + password);
+            URL url = new URL(baseURL + "?login=" + username + "&password=" + password);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 

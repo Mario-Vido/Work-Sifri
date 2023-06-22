@@ -1,19 +1,11 @@
 package Login;
 
-
-import Core.MyFrame;
 import Service.LogicService;
 import lombok.Getter;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 
 public class LogicForLogin implements ActionListener {
     @Getter
@@ -44,7 +36,7 @@ public class LogicForLogin implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String baseUrl = "http://localhost:8080/check-user-servlet";
+        String baseUrl = "http://localhost:8080/test-login";
         LogicService logicService = new LogicService();
         String username = usernameField.getText();
         char[] passwordChars = passwordField.getPassword();
