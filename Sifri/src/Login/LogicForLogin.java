@@ -17,7 +17,7 @@ import java.net.URL;
 
 public class LogicForLogin implements ActionListener {
     @Getter
-    private final JTextField usernameField;
+    public static JTextField usernameField;
     @Getter
     private final JPasswordField passwordField;
     @Getter
@@ -30,7 +30,7 @@ public class LogicForLogin implements ActionListener {
 
     public LogicForLogin(WindowForLogin windowForLogin) {
         this.windowForLogin = windowForLogin;
-        this.usernameField = new JTextField();
+        usernameField = new JTextField();
         this.passwordField = new JPasswordField();
         this.loginButton = new JButton("Login");
         this.passwordLabel = new JLabel("Password");

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.*;
 
 public class LogicService implements LogicInterface {
 
@@ -44,8 +43,8 @@ public class LogicService implements LogicInterface {
     }
 
     @Override
-    public int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl, JLabel textAfterEncryption) throws IOException {
-        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher);
+    public int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl, JLabel textAfterEncryption, String username) throws IOException {
+        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + username);
         HttpURLConnection connection;
         int responseCode;
 

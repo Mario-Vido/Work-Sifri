@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Objects;
 
+import Login.LogicForLogin;
 import Service.LogicService;
 import lombok.Getter;
 
@@ -47,12 +48,12 @@ public class Logic implements ActionListener {
         LogicService service = new LogicService();
         String encodedValue = URLEncoder.encode(textFromUser.getText());
         String typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
-
+        String userName = LogicForLogin.usernameField.getText();
         String baseUrl;
         if (e.getSource() == buttonForEncryption) {
             baseUrl ="http://localhost:8080/cypher";
             try {
-                int response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl,textAfterEncryption);
+                int response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl,textAfterEncryption,userName);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -61,7 +62,7 @@ public class Logic implements ActionListener {
             baseUrl = "http://localhost:8080/decypher";
             String valueAfterCypher= URLEncoder.encode(textAfterEncryption.getText());
             try {
-                int response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl,textAfterEncryption);
+                int response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl,textAfterEncryption,userName);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
