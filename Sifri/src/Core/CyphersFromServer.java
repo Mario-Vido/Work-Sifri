@@ -33,7 +33,7 @@ public class CyphersFromServer {
         reader.close();
 
         String namesString = response.toString();
-        String[] namesArray = namesString.split(",");
+        String[] namesArray = namesString.split(", ");
 
         names.addAll(Arrays.asList(namesArray));
     }
