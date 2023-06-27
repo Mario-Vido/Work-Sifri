@@ -8,6 +8,7 @@ import java.net.*;
 import java.util.Objects;
 
 import Login.LogicForLogin;
+import Login.WindowForLogin;
 import Service.LogicService;
 import lombok.Getter;
 
@@ -23,6 +24,10 @@ public class Logic implements ActionListener {
     private final JLabel textAfterEncryption;
     @Getter
     private final JComboBox chooseEncryption;
+    @Getter
+    private final JButton logout;
+
+    private final  JFrame myFrame;
 
 
     public Logic(JFrame myFrame) throws IOException {
@@ -32,6 +37,8 @@ public class Logic implements ActionListener {
         this.buttonForEncryption = new JButton("Encryption");
         this.textAfterEncryption = new JLabel();
         this.chooseEncryption =  new JComboBox<>(cyphersFromServer.getNames().toArray(new String[0]));
+        this.logout = new JButton("Logout");
+        this.myFrame = myFrame;
 
         addActionListeners();
     }
@@ -40,27 +47,35 @@ public class Logic implements ActionListener {
         buttonForEncryption.addActionListener(this);
         buttonForDecryption.addActionListener(this);
         chooseEncryption.addActionListener(this);
+        logout.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         LogicService service = new LogicService();
-        String encodedValue = URLEncoder.encode(textFromUser.getText());
-        String typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
+        String encodedValue;
+        String typeOfCypher;
         String userName = LogicForLogin.usernameField.getText();
         String baseUrl;
+        int response;
+
         if (e.getSource() == buttonForEncryption) {
-            baseUrl ="http://localhost:8080/cypher";
+            encodedValue = URLEncoder.encode(textFromUser.getText());
+            typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
+            baseUrl = "http://localhost:8080/cypher";
+
             try {
-                int response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl,textAfterEncryption,userName);
+                response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getSource() == buttonForDecryption) {
+            String valueAfterCypher = URLEncoder.encode(textAfterEncryption.getText());
+            typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
             baseUrl = "http://localhost:8080/decypher";
-            String valueAfterCypher= URLEncoder.encode(textAfterEncryption.getText());
+
             try {
-                int response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl,textAfterEncryption,userName);
+                response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl, textAfterEncryption, userName);
                 System.out.println(response);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);

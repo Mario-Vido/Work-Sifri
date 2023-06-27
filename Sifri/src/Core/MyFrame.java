@@ -14,11 +14,13 @@ public class MyFrame extends JFrame {
         frame.setLayout(new BorderLayout(3,1));
 
         Logic logic = new Logic(this);
+        frame.add(logic.getLogout(),BorderLayout.SOUTH);
         frame.add(logic.getTextFromUser(),BorderLayout.PAGE_START);
         frame.add(logic.getButtonForEncryption(),BorderLayout.LINE_START);
         frame.add(logic.getChooseEncryption(),BorderLayout.CENTER);
         frame.add(logic.getButtonForDecryption(),BorderLayout.LINE_END);
         frame.add(logic.getTextAfterEncryption(),BorderLayout.PAGE_END);
+
 
         this.add(frame);
         this.setLocationRelativeTo(null);

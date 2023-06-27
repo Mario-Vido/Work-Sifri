@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a0a94d15-f2e7-43a4-b30d-6dd9369a5bab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Core/CyphersFromServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/CyphersFromServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Interface/LogicInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Interface/LogicInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Login/LogicForLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Login/LogicForLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Objects/Cypher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/Logic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Core/MyFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sifri/src/Service/LogicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Service/LogicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sifri/src/Service/SetConnectionToServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sifri/src/Service/SetConnectionToServerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Core/CyphersFromServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Core/CyphersFromServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Login/LogicForLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Login/LogicForLogin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Service/LogicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Service/LogicService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Work-Sifri/Service/SetConnectionToServerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Work-Sifri/Service/SetConnectionToServerService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +89,7 @@
       <workItem from="1687242811217" duration="20500000" />
       <workItem from="1687327837558" duration="14973000" />
       <workItem from="1687413700174" duration="19306000" />
-      <workItem from="1687845944467" duration="8508000" />
+      <workItem from="1687845944467" duration="15470000" />
     </task>
     <servers />
   </component>

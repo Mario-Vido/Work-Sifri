@@ -50,13 +50,10 @@ public class LogicService implements LogicInterface {
 
     @Override
     public int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl, JLabel textAfterEncryption, String username) throws IOException {
-        String POST_PARAMS = "&param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + username;
-//        URL url = new URL(baseUrl + "?param1=" + encodedValue + "&param2=" + typeOfCypher + "&param3=" + username);
+        String POST_PARAMS = "&encodedValue=" + encodedValue + "&typeOfCypher=" + typeOfCypher + "&username=" + username;
         HttpURLConnection connection;
         int responseCode;
         try {
-
-//            connection = (HttpURLConnection) url.openConnection();
             connection = SetConnectionToServerService.getInstance().getConnection(String.valueOf(baseUrl));
             connection.setRequestMethod("POST");
 
