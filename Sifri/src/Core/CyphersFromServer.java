@@ -1,10 +1,11 @@
 package Core;
 
+import Service.SetConnectionToServerService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.*;
 
 public class CyphersFromServer {
@@ -18,10 +19,10 @@ public class CyphersFromServer {
     public void getKeysFromCyphers() throws IOException {
         names = new ArrayList<>();
 
-        URL url = new URL("http://localhost:8080/creatingcypher");
+        String url = ("http://localhost:8080/creatingcypher");
 
         HttpURLConnection connection;
-        connection = (HttpURLConnection) url.openConnection();
+        connection = SetConnectionToServerService.getInstance().getConnection(url);
         connection.setRequestMethod("GET");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));

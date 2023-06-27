@@ -9,14 +9,12 @@ public class SetConnectionToServerService {
     private String sessionId;
 
     private SetConnectionToServerService() {
-// Inicializácia pripojenia tu
-        try {
-            URL url = new URL("http://localhost:8080/test-login");
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-// Nastavte ďalšie parametre pripojenia, ak je to potrebné
 
-// Získajte session ID z prvej odpovede servera
+        try {
+            URL url = new URL("http://localhost:8080");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+
             sessionId = connection.getHeaderField("Set-Cookie");
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,15 +29,12 @@ public class SetConnectionToServerService {
     }
 
     public HttpURLConnection getConnection(String url) {
-// Ak je požadované URL iné ako predvolené, vytvorte nové pripojenie
-        if (!url.equals("http://localhost:8080/test-login")) {
+        if (!url.equals("http://localhost:8080")) {
             try {
                 URL newURL = new URL(url);
                 connection = (HttpURLConnection) newURL.openConnection();
-                connection.setRequestMethod("GET");
-// Nastavte ďalšie parametre pripojenia, ak je to potrebné
+                connection.setRequestMethod("POST");
 
-// Nastavte session ID do hlavičky požiadavky
                 connection.setRequestProperty("Cookie", sessionId);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -4,7 +4,7 @@ import Login.WindowForLogin;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.sql.Connection;
+
 
 public interface LogicInterface {
 

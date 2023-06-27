@@ -36,7 +36,7 @@ public class LogicForLogin implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String baseUrl = "http://localhost:8080/test-login";
+        String baseUrl = "http://localhost:8080/login-from-client";
         LogicService logicService = new LogicService();
         String username = usernameField.getText();
         char[] passwordChars = passwordField.getPassword();
