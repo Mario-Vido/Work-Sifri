@@ -16,10 +16,10 @@ public class LogicService implements LogicInterface {
     @Override
     public void getResponseCodeFromUserDataBase(String username, String password, String baseURL, WindowForLogin windowForLogin) throws IOException {
         String response;
-
         try {
             URL url = new URL(baseURL + "?login=" + username + "&password=" + password);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = SetConnectionToServerService.getInstance().getConnection(String.valueOf(url));
             connection.setRequestMethod("GET");
 
             try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -50,7 +50,8 @@ public class LogicService implements LogicInterface {
 
         try {
 
-            connection = (HttpURLConnection) url.openConnection();
+//            connection = (HttpURLConnection) url.openConnection();
+            connection = SetConnectionToServerService.getInstance().getConnection(String.valueOf(url));
             connection.setRequestMethod("GET");
 
             try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
