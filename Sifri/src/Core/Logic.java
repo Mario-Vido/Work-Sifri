@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.*;
 import java.util.Objects;
-
 import Login.LogicForLogin;
 import Login.WindowForLogin;
 import Service.LogicService;
@@ -56,30 +55,31 @@ public class Logic implements ActionListener {
         String typeOfCypher;
         String userName = LogicForLogin.usernameField.getText();
         String baseUrl;
-        int response;
 
         if (e.getSource() == buttonForEncryption) {
-            encodedValue = URLEncoder.encode(textFromUser.getText());
-            typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
-            baseUrl = "http://localhost:8080/cypher";
-
             try {
-                response = service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName);
-                System.out.println(response);
+                if(!(Objects.equals(textFromUser.getText(), ""))){
+                    System.out.println("empty");
+                    encodedValue = URLEncoder.encode(textFromUser.getText());
+                    typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
+                    baseUrl = "http://localhost:8080/cypher";
+                    service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName);
+                }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getSource() == buttonForDecryption) {
+            try {
             String valueAfterCypher = URLEncoder.encode(textAfterEncryption.getText());
             typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
-            baseUrl = "http://localhost:8080/decypher";
-
-            try {
-                response = service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl, textAfterEncryption, userName);
-                System.out.println(response);
+            baseUrl = "http://localhost:8080/decipher";
+            service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl, textAfterEncryption, userName);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+        } else if(e.getSource()== logout){
+            myFrame.dispose();
+            new WindowForLogin();
         }
     }
 
