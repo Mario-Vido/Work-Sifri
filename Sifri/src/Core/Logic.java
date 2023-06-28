@@ -59,11 +59,12 @@ public class Logic implements ActionListener {
         if (e.getSource() == buttonForEncryption) {
             try {
                 if(!(Objects.equals(textFromUser.getText(), ""))){
-                    System.out.println("empty");
                     encodedValue = URLEncoder.encode(textFromUser.getText());
                     typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
                     baseUrl = "http://localhost:8080/cypher";
                     service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Text for encryption is empty");
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
