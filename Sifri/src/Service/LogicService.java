@@ -1,8 +1,9 @@
 package Service;
 
-import Core.MyFrame;
+import Frames.MyFrame;
 import Interface.LogicInterface;
-import Login.WindowForLogin;
+import Frames.WindowForLogin;
+import exceptions.NoInputArgument;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -15,7 +16,7 @@ import java.net.HttpURLConnection;
 public class LogicService implements LogicInterface {
 
     @Override
-    public void getResponseCodeFromUserDataBase(String username, String password, String baseURL, WindowForLogin windowForLogin) throws IOException {
+    public void getResponseCodeFromUserDataBase(String username, String password, String baseURL, WindowForLogin windowForLogin) {
         String response;
         String POST_PARAMS = "login="+username+"&password="+password;
         try {
@@ -35,25 +36,28 @@ public class LogicService implements LogicInterface {
                     content.append(line);
                 }
                 response = content.toString();
+                if(response.equals("false")){
+                    throw new NoInputArgument("No username or password");
+                }else{
+                    new MyFrame();
+                    windowForLogin.dispose();
+                }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (response.equals("true")) {
-            new MyFrame();
-            windowForLogin.dispose();
-        } else {
-            JOptionPane.showMessageDialog(windowForLogin, "Invalid username or password", "Login Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NoInputArgument | IOException e) {
+            showErrorMassage(windowForLogin,e.getMessage());
         }
     }
 
     @Override
-    public int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl, JLabel textAfterEncryption, String username) throws IOException {
+    public int getResponseCode(String encodedValue, String typeOfCypher, String baseUrl, JLabel textAfterEncryption, String username,JFrame myFrame)  {
+        
         String POST_PARAMS = "&encodedValue=" + encodedValue + "&typeOfCypher=" + typeOfCypher + "&username=" + username;
         HttpURLConnection connection;
-        int responseCode;
+        int responseCode = 0;
         try {
+            if(encodedValue.equals("")){
+                throw new NoInputArgument("Empty cypher field");
+            }
             connection = SetConnectionToServerService.getInstance().getConnection(String.valueOf(baseUrl));
             connection.setRequestMethod("POST");
 
@@ -70,11 +74,15 @@ public class LogicService implements LogicInterface {
 
             responseCode = connection.getResponseCode();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (NoInputArgument | IOException e) {
+            showErrorMassage(myFrame,e.getMessage());
         }
 
         return responseCode;
+    }
+
+    public void showErrorMassage(JFrame windowForLogin, String msg){
+        JOptionPane.showMessageDialog(windowForLogin, msg, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 

@@ -1,4 +1,4 @@
-import Login.WindowForLogin;
+import Frames.WindowForLogin;
 
 public class Main {
     public static void main(String[] args) {

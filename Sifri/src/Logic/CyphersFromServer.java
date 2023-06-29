@@ -1,4 +1,4 @@
-package Core;
+package Logic;
 
 import Service.SetConnectionToServerService;
 
@@ -18,20 +18,19 @@ public class CyphersFromServer {
 
     public void getKeysFromCyphers() throws IOException {
         names = new ArrayList<>();
-
+        StringBuilder response;
+        String line;
         String url = ("http://localhost:8080/creatingcypher");
 
         HttpURLConnection connection;
         connection = SetConnectionToServerService.getInstance().getConnection(url);
-        connection.setRequestMethod("GET");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
-        }
-        reader.close();
+            connection.setRequestMethod("GET");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            response = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
 
         String namesString = response.toString();
         String[] namesArray = namesString.split(", ");

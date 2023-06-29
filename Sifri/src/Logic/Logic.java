@@ -1,4 +1,4 @@
-package Core;
+package Logic;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.*;
 import java.util.Objects;
-import Login.LogicForLogin;
-import Login.WindowForLogin;
+
+import Frames.WindowForLogin;
 import Service.LogicService;
 import lombok.Getter;
 
@@ -38,7 +38,6 @@ public class Logic implements ActionListener {
         this.chooseEncryption =  new JComboBox<>(cyphersFromServer.getNames().toArray(new String[0]));
         this.logout = new JButton("Logout");
         this.myFrame = myFrame;
-
         addActionListeners();
     }
 
@@ -57,27 +56,17 @@ public class Logic implements ActionListener {
         String baseUrl;
 
         if (e.getSource() == buttonForEncryption) {
-            try {
-                if(!(Objects.equals(textFromUser.getText(), ""))){
+
                     encodedValue = URLEncoder.encode(textFromUser.getText());
                     typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
                     baseUrl = "http://localhost:8080/cypher";
-                    service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Text for encryption is empty");
-                }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+                    service.getResponseCode(encodedValue, typeOfCypher, baseUrl, textAfterEncryption, userName,myFrame);
+
         } else if (e.getSource() == buttonForDecryption) {
-            try {
             String valueAfterCypher = URLEncoder.encode(textAfterEncryption.getText());
             typeOfCypher = URLEncoder.encode(Objects.requireNonNull(chooseEncryption.getSelectedItem()).toString());
             baseUrl = "http://localhost:8080/decipher";
-            service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl, textAfterEncryption, userName);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            service.getResponseCode(valueAfterCypher, typeOfCypher, baseUrl, textAfterEncryption, userName,myFrame);
         } else if(e.getSource()== logout){
             myFrame.dispose();
             new WindowForLogin();

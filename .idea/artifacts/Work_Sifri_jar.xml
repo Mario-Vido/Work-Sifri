@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Work-Sifri:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Work_Sifri_jar</output-path>
+    <root id="archive" name="Work-Sifri.jar">
+      <element id="module-output" name="Work-Sifri" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../DataBase/postgresql-42.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/gson-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

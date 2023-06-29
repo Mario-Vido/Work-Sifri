@@ -1,5 +1,6 @@
-package Login;
+package Logic;
 
+import Frames.WindowForLogin;
 import Service.LogicService;
 import lombok.Getter;
 import javax.swing.*;
@@ -41,10 +42,6 @@ public class LogicForLogin implements ActionListener {
         String username = usernameField.getText();
         char[] passwordChars = passwordField.getPassword();
         String password = new String(passwordChars);
-        try {
             logicService.getResponseCodeFromUserDataBase(username, password, baseUrl,windowForLogin);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
     }
 }

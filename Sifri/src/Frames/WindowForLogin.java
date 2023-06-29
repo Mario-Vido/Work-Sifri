@@ -1,4 +1,6 @@
-package Login;
+package Frames;
+
+import Logic.LogicForLogin;
 
 import javax.swing.*;
 import java.awt.*;
